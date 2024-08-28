@@ -9,7 +9,7 @@
 
 Jawaban
 1. Data engineer adalah seseorang yang bertugas untuk membangun sistem untuk mengumpulkan dan mengolah data sehingga bisa digunakan untuk keperluan perusahaan.
-2. -
+2. Saya pernah mengolah data untuk sentimen analisis. selain itu saya pernah mengolah data untuk rekomendasi menggunakan Azure. Saya juga pernah membuat streamlit bank churn berdasarkan data bank churn.
 3. AI adalah kepanjangan dari Artificial Intelligence, AI merupakan teknologi yang dirancang untuk membuat sistem komputer mampu meniru kemampuan intelektual manusia.
 4. Data memiliki peran penting dalam pengambilan keputusan. Ketersediaan data memungkinkan seseorang membuat keputusan yang lebih baik dalam menghadapi permasalahan tertentu. Salah satu dampak dari kebocoran data adalah Pencurian Identitas. Data pribadi yang bocor dapat digunakan oleh pelaku kejahatan untuk mencuri identitas seseorang. Ini bisa berujung pada pembukaan rekening bank fiktif, aplikasi kredit palsu, dan bahkan kegiatan kriminal lainnya atas nama korban.
 5. model generative AI adalah tipe AI yang dapat membuat konten dan ide baru, termasuk percakapan, cerita, gambar, video, dan musik. generative AI adalah langkah selanjutnya dalam kecerdasan buatan. Kita dapat melatihnya untuk belajar bahasa manusia, bahasa pemrograman, seni, kimia, biologi, atau materi pelajaran kompleks apa pun. Misalnya, AI generatif dapat mempelajari kosakata bahasa Inggris dan membuat puisi dari kata-kata yang diprosesnya.
