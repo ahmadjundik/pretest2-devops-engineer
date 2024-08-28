@@ -30,3 +30,84 @@ dan silahkan lakukan proses dibawah ini:
 
 Keterangan :
 flow kestra dan script python sertakan dalam git kalian ketika pelaporan
+
+Berikut adalah script python saya untuk data cleaning data pada kestra
+
+id: cleaning-data
+namespace: pretest2
+
+inputs:
+  - id: file
+    type: FILE
+
+tasks:
+  - id: cleaning
+    type: io.kestra.plugin.scripts.python.Script
+    inputFiles: 
+      input_csv: "{{ inputs.file }}"
+    beforeCommands: 
+      - pip install pandas
+    script: |
+      import pandas as pd
+      import re
+
+      df = pd.read_csv('{{ inputs.file }}', na_values=['null'])
+      df.drop(df.columns[[1,2,4,5,7,8,9,10,11,12,13,14]], axis=1,inplace=True)
+
+      df = df.dropna()
+
+      def clean(text): 
+        text = text.lower()
+        text = re.sub(r'@[A-Za-z0-9]+', '', text)
+        text = re.sub(r'#[A-Za-z0-9]+', '', text)
+        text = re.sub(r'_[A-Za-z0-9]+', '', text)
+        text = re.sub(r'RT[\s]', '', text)
+        text = re.sub(r'http\s+', '', text)
+        text = re.sub(r'[0-9]+', '', text)
+        text = re.sub(r'#[^A-Za-z]+', '', text)
+    
+      df['reviewContent'] = df['reviewContent'].apply(clean)
+      df.to_csv('review.csv', index=False)
+
+
+    outputFiles:
+      - '*.csv'
+
+Berikut adalah script python saya untuk sentimen analisis berdasarkan rating
+
+id: sentimen
+namespace: pretest2
+
+inputs:
+  - id: file
+    type: FILE
+
+tasks:
+  - id: sentiment
+    type: io.kestra.plugin.scripts.python.Script
+    inputFiles: 
+      input_csv: "{{ inputs.file }}"
+    beforeCommands: 
+      - pip install pandas
+    script: |
+      import pandas as pd
+
+      df = pd.read_csv('{{ inputs.file }}')
+  
+      def klasifikasi(rating):
+        if rating == 5:
+          return 'Excellent'
+        elif rating == 4:
+          return 'Very good'
+        elif rating == 3:
+          return 'Good'
+        elif rating == 2:
+          return 'Bad'
+        elif rating == 1:
+          return 'Very bad'
+
+      df['klasifikasi'] = df['rating'].apply(klasifikasi)
+      df.to_csv('analisis_sentimen.csv', index=False)
+
+    outputFiles:
+      - '*.csv'
