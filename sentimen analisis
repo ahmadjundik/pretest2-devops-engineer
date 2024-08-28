@@ -1,0 +1,36 @@
+id: sentimen
+namespace: pretest2
+
+inputs:
+  - id: file
+    type: FILE
+
+tasks:
+  - id: sentiment
+    type: io.kestra.plugin.scripts.python.Script
+    inputFiles: 
+      input_csv: "{{ inputs.file }}"
+    beforeCommands: 
+      - pip install pandas
+    script: |
+      import pandas as pd
+
+      df = pd.read_csv('{{ inputs.file }}')
+  
+      def klasifikasi(rating):
+        if rating == 5:
+          return 'Excellent'
+        elif rating == 4:
+          return 'Very good'
+        elif rating == 3:
+          return 'Good'
+        elif rating == 2:
+          return 'Bad'
+        elif rating == 1:
+          return 'Very bad'
+
+      df['klasifikasi'] = df['rating'].apply(klasifikasi)
+      df.to_csv('analisis_sentimen.csv', index=False)
+
+    outputFiles:
+      - '*.csv'
